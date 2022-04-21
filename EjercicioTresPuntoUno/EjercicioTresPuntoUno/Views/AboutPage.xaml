@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="EjercicioTresPuntoUno.Views.AboutPage"
+             xmlns:vm="clr-namespace:EjercicioTresPuntoUno.ViewModels">
+    <ContentPage.Content>
+        <StackLayout>
+            <Label Text="Desarrollo de Ejercicio 3.1"
+                VerticalOptions="CenterAndExpand" 
+                HorizontalOptions="CenterAndExpand" />
+            <Label Text="FLAVIO ALEXANDER CARMONA BUESO 259051138"
+                VerticalOptions="CenterAndExpand" 
+                HorizontalOptions="CenterAndExpand" />
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

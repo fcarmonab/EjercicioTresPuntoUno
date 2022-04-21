@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:EjercicioTresPuntoUno.ViewModels"
+             xmlns:model="clr-namespace:EjercicioTresPuntoUno.Models"
+             x:Class="EjercicioTresPuntoUno.Views.EmpleadoPage">
+    
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Agregar" Command="{Binding AddEmpleadoComand}"/>
+    </ContentPage.ToolbarItems>
+    
+    <ContentPage.Content>
+        <StackLayout>
+            <RefreshView x:DataType="local:EmpleadoViewModel"
+                         Command="{Binding LoadEmpleadoCommand}"
+                         IsRefreshing="{Binding IsBusy}">
+                <CollectionView
+                    ItemsSource="{Binding EmpleadosInfos}"
+                    SelectionMode="None">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <StackLayout x:DataType="model:InfoEmpleados">
+                                <SwipeView>
+                                    <SwipeView.RightItems>
+                                        <SwipeItems>
+                                            <SwipeItem Text="Delete" BackgroundColor="Red"
+                                                       Command="{Binding Source={RelativeSource AncestorType={x:Type local:EmpleadoViewModel}}, Path=EmpleadoTappedDelete}"
+                                                       CommandParameter="{Binding .}"/>
+                                            <SwipeItem Text="Editar" BackgroundColor="Blue"
+                                                       Command="{Binding Source={RelativeSource AncestorType={x:Type local:EmpleadoViewModel}}, Path=EmpleadoTappedEdit}"
+                                                       CommandParameter="{Binding .}"/>
+                                            <SwipeItem IsDestructive="True" Text="Close" BackgroundColor="Green" />
+                                        </SwipeItems>
+                                    </SwipeView.RightItems>
+
+                                    <Grid Padding="5">
+                                        <Frame CornerRadius="10" HasShadow="True">
+                                            <StackLayout Orientation="Horizontal">
+                                                <Image Grid.RowSpan="2" Source="xamlogo.png" Aspect="AspectFill" HeightRequest="70" WidthRequest="80" Margin="0,0,10,0"></Image>
+                                                <StackLayout VerticalOptions="CenterAndExpand">
+                                                    <StackLayout Orientation="Horizontal">
+                                                        <Label Grid.Column="1" Text="{Binding Nombre}" FontAttributes="Bold"></Label>
+                                                        <Label Grid.Column="2" Text="{Binding Apellido}" FontAttributes="Bold"></Label>
+                                                    </StackLayout>
+                                                    <Label Grid.Row="1" Grid.Column="1" Text="{Binding Puesto}" VerticalOptions="End"></Label>
+                                                </StackLayout>
+                                                <StackLayout HorizontalOptions="EndAndExpand" VerticalOptions="Center">
+                                                    <Image Source="edit.png" Grid.Column="3" WidthRequest="30" HeightRequest="30" VerticalOptions="End">
+                                                        <Image.GestureRecognizers>
+                                                            <TapGestureRecognizer NumberOfTapsRequired="1" 
+                                                                                  Command="{Binding Source={RelativeSource AncestorType={x:Type local:EmpleadoViewModel}}, Path=EmpleadoTappedEdit}"
+                                                                                  CommandParameter="{Binding .}"/>
+                                                        </Image.GestureRecognizers>
+                                                    </Image>
+                                                </StackLayout>
+                                            </StackLayout>
+                                        </Frame>
+                                    </Grid>
+                                </SwipeView>
+                            </StackLayout>
+
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </RefreshView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
